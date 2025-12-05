@@ -5,6 +5,10 @@ const { data: leaderboard, pending, refresh } = useAsyncData<LeaderboardEntry[]>
   $fetch('/api/game/leaderboard'))
 
 defineExpose({ refresh })
+
+onMounted(() => {
+  refresh()
+})
 </script>
 
 <template>
