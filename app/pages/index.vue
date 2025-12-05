@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { loggedIn } = useUserSession()
+const { loggedIn, user } = useUserSession()
 const score = ref<number>(0)
 const leaderboardRef = ref()
 
@@ -49,5 +49,16 @@ async function handleGameOver(finalScore: number) {
         />
       </div>
     </div>
+    <UAlert
+      v-if="!user"
+      title="Heads up!"
+      variant="subtle"
+      color="warning"
+      description="If you want your score to be saved, you must log in."
+      icon="dinkie-icons:snake"
+      :ui="{
+        icon: 'size-11',
+      }"
+    />
   </UContainer>
 </template>

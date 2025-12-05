@@ -37,14 +37,19 @@ interface Point { x: number, y: number }
 class Particle {
   x: number; y: number; vx: number; vy: number; life: number; color: string
   constructor(x: number, y: number, color: string) {
-    this.x = x; this.y = y
+    this.x = x
+    this.y = y
     this.vx = (Math.random() - 0.5) * 10
     this.vy = (Math.random() - 0.5) * 10
     this.life = 1.0
     this.color = color
   }
 
-  update() { this.x += this.vx; this.y += this.vy; this.life -= 0.04 }
+  update() {
+    this.x += this.vx
+    this.y += this.vy
+    this.life -= 0.04
+  }
 }
 
 let snake: Point[] = []
@@ -146,8 +151,14 @@ function draw() {
   ctx.strokeStyle = c.grid
   ctx.lineWidth = 0.5
   ctx.beginPath()
-  for (let x = 0; x <= BOARD_WIDTH; x += GRID_SIZE) { ctx.moveTo(x, 0); ctx.lineTo(x, BOARD_HEIGHT) }
-  for (let y = 0; y <= BOARD_HEIGHT; y += GRID_SIZE) { ctx.moveTo(0, y); ctx.lineTo(BOARD_WIDTH, y) }
+  for (let x = 0; x <= BOARD_WIDTH; x += GRID_SIZE) {
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, BOARD_HEIGHT)
+  }
+  for (let y = 0; y <= BOARD_HEIGHT; y += GRID_SIZE) {
+    ctx.moveTo(0, y)
+    ctx.lineTo(BOARD_WIDTH, y)
+  }
   ctx.stroke()
 
   const pulse = Math.sin(Date.now() / 200) * 5
@@ -229,13 +240,17 @@ function handleKeydown(e: KeyboardEvent) {
 
   switch (e.key) {
     case 'ArrowUp': if (velocity.y === 0)
-      nextVelocity = { x: 0, y: -1 }; break
+      nextVelocity = { x: 0, y: -1 }
+      break
     case 'ArrowDown': if (velocity.y === 0)
-      nextVelocity = { x: 0, y: 1 }; break
+      nextVelocity = { x: 0, y: 1 }
+      break
     case 'ArrowLeft': if (velocity.x === 0)
-      nextVelocity = { x: -1, y: 0 }; break
+      nextVelocity = { x: -1, y: 0 }
+      break
     case 'ArrowRight': if (velocity.x === 0)
-      nextVelocity = { x: 1, y: 0 }; break
+      nextVelocity = { x: 1, y: 0 }
+      break
   }
 }
 

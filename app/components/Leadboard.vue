@@ -12,7 +12,7 @@ defineExpose({ refresh })
     <template #header>
       <div class="flex items-center justify-between py-1">
         <h3 class="font-extrabold text-xl flex items-center gap-2">
-          <UIcon name="i-heroicons-trophy" class="text-yellow-400 text-2xl" />
+          <UIcon name="streamline-pixel:entertainment-events-hobbies-reward-winner-talent" class="text-yellow-400 text-2xl" />
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400">
             Top Scorers
           </span>
