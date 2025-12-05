@@ -17,14 +17,14 @@ export default defineNuxtConfig({
     // // },
 
     // production
-    // storage: {
-    //   data: {
-    //     driver: process.env.NUXT_STORAGE_DRIVER || 'fs',
-    //     url: process.env.UPSTASH_REDIS_REST_URL,
-    //     token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    //     base: './.data/db',
-    //   },
-    // },
+    storage: {
+      data: {
+        driver: process.env.NUXT_STORAGE_DRIVER || 'fs',
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+        base: './.data/db',
+      },
+    },
   },
 
   css: ['~/assets/css/main.css'],

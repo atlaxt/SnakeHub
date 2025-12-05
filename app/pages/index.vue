@@ -35,6 +35,9 @@ async function handleGameOver(finalScore: number) {
           label="GitHub" to="https://github.com/atlaxt/SnakeHub"
         />
         <UColorModeSelect class="w-full mt-2 mb-2" />
+        <div class="text-center text-xs text-muted font-mono">
+          v1.0.0
+        </div>
       </div>
 
       <div class="lg:col-span-8 flex justify-center">
