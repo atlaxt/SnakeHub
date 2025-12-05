@@ -4,9 +4,9 @@
   "private": true,
   "packageManager": "pnpm@10.23.0",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
+    "build": "nuxt build --dotenv .env.production",
+    "dev": "nuxt dev --dotenv .env.local",
+    "preview": "nuxt preview --dotenv .env.production",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
