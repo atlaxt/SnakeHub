@@ -6,11 +6,16 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
-  css: ['~/assets/css/main.css'],
-
-  runtimeConfig: {
-
+  nitro: {
+    storage: {
+      data: {
+        driver: 'fs',
+        base: './.data/db',
+      },
+    },
   },
+
+  css: ['~/assets/css/main.css'],
 
   routeRules: {
     '/': { prerender: true },
