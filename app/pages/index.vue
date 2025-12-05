@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const score = ref<number>(0)
 </script>
 
@@ -12,7 +11,7 @@ const score = ref<number>(0)
         <Leadboard />
         <UButton
           target="_blank" variant="outline" class="mt-2 w-full" color="neutral" icon="i-simple-icons-github"
-          label="GitHub"
+          label="GitHub" to="https://github.com/atlaxt/SnakeHub"
         />
         <UColorModeSelect class="w-full mt-2 mb-2" />
         v1.0.0
