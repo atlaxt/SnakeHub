@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { user } = useUserSession()
 
-const { data: leaderboard, pending, refresh } = useAsyncData<LeaderboardEntry[]>('leaderboard', () =>
+const { data: leaderboard, pending, refresh } = useAsyncData<LeaderboardEntry[]>(() =>
   $fetch('/api/game/leaderboard'))
 
 defineExpose({ refresh })
