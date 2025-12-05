@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@types/node": "^24.10.1",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vue-tsc": "catalog:"
