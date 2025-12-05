@@ -1,4 +1,0 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
-@import "./typography.css";
-@custom-variant dark (&:where(.dark, .dark *));

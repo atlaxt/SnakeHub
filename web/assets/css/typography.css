@@ -1,8 +1,0 @@
-div {
-  font-family: Inter, sans-serif;
-}
-
-h1 {
-    @apply text-2xl font-bold tracking-tight
-    antialiased font-stretch-extra-condensed
-}

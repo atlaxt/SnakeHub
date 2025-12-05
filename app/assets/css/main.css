@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Pixelify Sans', sans-serif;
+}
+
+:root {
+  --ui-container: var(--container-7xl);
+}
