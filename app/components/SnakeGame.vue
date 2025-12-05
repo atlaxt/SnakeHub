@@ -2,13 +2,11 @@
 import { useColorMode } from '#imports'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
-// -- Eventler --
 const emits = defineEmits<{
   (e: 'update:score', score: number): void
   (e: 'game-state', state: 'playing' | 'gameover' | 'idle'): void
 }>()
 
-// -- Ayarlar --
 const GRID_SIZE = 25
 const TILE_COUNT_X = 32
 const TILE_COUNT_Y = 20
@@ -16,26 +14,22 @@ const BOARD_WIDTH = TILE_COUNT_X * GRID_SIZE
 const BOARD_HEIGHT = TILE_COUNT_Y * GRID_SIZE
 const BASE_SPEED = 70
 
-// -- Renkler (Siyah/Beyaz Minimalist) --
 const colorMode = useColorMode()
 const colors = computed(() => {
   const isDark = colorMode.value === 'dark'
-  // Ana renk: Dark ise Beyaz, Light ise Siyah
   const mainColor = isDark ? '#ffffff' : '#000000'
 
   return {
-    bg: 'transparent', // Şeffaf arkaplan
-    grid: 'transparent', // Görünmez ızgara
+    bg: 'transparent',
+    grid: 'transparent',
     snake: mainColor,
     food: mainColor,
     text: mainColor,
-    // Glow sadece dark modda beyaz için hafifçe olsun
     glowStrength: isDark ? 15 : 0,
     glowColor: isDark ? 'rgba(255,255,255,0.6)' : 'transparent',
   }
 })
 
-// -- Değişkenler --
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 let ctx: CanvasRenderingContext2D | null = null
 
@@ -63,9 +57,6 @@ let gameState: 'idle' | 'playing' | 'gameover' = 'idle'
 let lastRenderTime = 0
 let snakeMoveTimer = 0
 
-// -- Oyun Mantığı --
-
-// Oyunu Başlat
 function initGame() {
   if (gameState === 'playing')
     return
@@ -82,7 +73,6 @@ function initGame() {
   spawnFood()
 }
 
-// Oyunu Güncelle
 function update(dt: number) {
   particles.forEach(p => p.update())
   particles = particles.filter(p => p.life > 0)
@@ -98,7 +88,6 @@ function update(dt: number) {
   velocity = { ...nextVelocity }
   const head = { x: snake[0]!.x + velocity.x, y: snake[0]!.y + velocity.y }
 
-  // --- DUVARLARDAN GEÇME (WRAP) ---
   if (head.x < 0)
     head.x = TILE_COUNT_X - 1
   else if (head.x >= TILE_COUNT_X)
@@ -108,16 +97,13 @@ function update(dt: number) {
     head.y = TILE_COUNT_Y - 1
   else if (head.y >= TILE_COUNT_Y)
     head.y = 0
-  // --------------------------------
 
-  // Kendine Çarpma Kontrolü
   if (snake.some(s => s.x === head.x && s.y === head.y)) {
     return gameOver()
   }
 
   snake.unshift(head)
 
-  // Yem Yeme
   if (head.x === food.x && head.y === food.y) {
     score += 10
     emits('update:score', score)
@@ -150,16 +136,13 @@ function createExplosion(x: number, y: number, color: string) {
   }
 }
 
-// -- Çizim --
 function draw() {
   if (!ctx || !canvasRef.value)
     return
   const c = colors.value
 
-  // 1. Temizle (Şeffaf arkaplan için clearRect kullanıyoruz)
   ctx.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT)
 
-  // 2. Grid (Rengi transparent olduğu için görünmeyecek)
   ctx.strokeStyle = c.grid
   ctx.lineWidth = 0.5
   ctx.beginPath()
@@ -167,7 +150,6 @@ function draw() {
   for (let y = 0; y <= BOARD_HEIGHT; y += GRID_SIZE) { ctx.moveTo(0, y); ctx.lineTo(BOARD_WIDTH, y) }
   ctx.stroke()
 
-  // 3. Yem
   const pulse = Math.sin(Date.now() / 200) * 5
   ctx.shadowBlur = c.glowStrength + pulse
   ctx.shadowColor = c.glowColor
@@ -177,7 +159,6 @@ function draw() {
   ctx.fill()
   ctx.shadowBlur = 0
 
-  // 4. Yılan
   ctx.fillStyle = c.snake
   snake.forEach((seg, i) => {
     const isHead = i === 0
@@ -185,12 +166,10 @@ function draw() {
       ctx!.shadowBlur = c.glowStrength
       ctx!.shadowColor = c.glowColor
     }
-    // Kare çizimi (hafif padding ile)
     ctx!.fillRect(seg.x * GRID_SIZE + 1, seg.y * GRID_SIZE + 1, GRID_SIZE - 2, GRID_SIZE - 2)
     ctx!.shadowBlur = 0
   })
 
-  // 5. Partiküller
   particles.forEach((p) => {
     ctx!.globalAlpha = p.life
     ctx!.fillStyle = p.color
@@ -200,7 +179,6 @@ function draw() {
   })
   ctx.globalAlpha = 1.0
 
-  // 6. UI Mesajları
   if (gameState === 'idle') {
     drawCenterText('CLICK OR PRESS ENTER', 24)
   }
@@ -215,7 +193,6 @@ function drawCenterText(text: string, size: number) {
   ctx!.font = `bold ${size}px monospace`
   ctx!.textAlign = 'center'
   ctx!.textBaseline = 'middle'
-  // Metinlerde de hafif glow olsun dark modda
   ctx!.shadowBlur = colors.value.glowStrength
   ctx!.shadowColor = colors.value.glowColor
   ctx!.fillText(text, BOARD_WIDTH / 2, BOARD_HEIGHT / 2)
@@ -229,7 +206,6 @@ function drawSubText(text: string, size: number) {
   ctx!.fillText(text, BOARD_WIDTH / 2, BOARD_HEIGHT / 2 + 35)
 }
 
-// -- Döngü ve Klavye --
 function loop(timestamp: number) {
   const dt = timestamp - lastRenderTime
   lastRenderTime = timestamp
@@ -272,7 +248,6 @@ function handleCanvasClick() {
 onMounted(() => {
   if (canvasRef.value) {
     ctx = canvasRef.value.getContext('2d')
-    // Başlangıçta bir kez çiz ki boş kalmasın
     draw()
     requestAnimationFrame(loop)
   }
@@ -283,7 +258,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
 })
 
-// Tema değişince anında yeniden çiz
 watch(colorMode, () => {
   draw()
 })

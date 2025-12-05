@@ -1,9 +1,9 @@
-ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - '@tailwindcss/oxide'
-  - esbuild
-  - unrs-resolver
-  - vue-demi
+catalogMode: prefer
+cleanupUnusedCatalogs: true
+
+shellEmulator: true
+trustPolicy: no-downgrade
+
 catalog:
   '@antfu/eslint-config': ^6.4.2
   '@iconify-json/lucide': ^1.2.74
@@ -14,3 +14,9 @@ catalog:
   nuxt-auth-utils: 0.5.25
   typescript: ^5.9.3
   vue-tsc: ^3.1.5
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - unrs-resolver
+  - vue-demi

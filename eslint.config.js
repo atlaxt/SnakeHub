@@ -5,5 +5,6 @@ export default antfu({
   vue: true,
   rules: {
     'vue/custom-event-name-casing': 'off',
+    'pnpm/json-enforce-catalog': 'off',
   },
 })
