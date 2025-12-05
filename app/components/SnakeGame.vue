@@ -294,7 +294,7 @@ watch(colorMode, () => {
     ref="canvasRef"
     :width="BOARD_WIDTH"
     :height="BOARD_HEIGHT"
-    class="rounded-md block bg-muted cursor-pointer touch-none w-full h-auto max-w-[800px] select-none border border-default transition-colors"
+    class="rounded-md block bg-muted cursor-none touch-none w-full h-auto max-w-[800px] select-none border border-default transition-colors"
     @click="handleCanvasClick"
   />
 </template>
