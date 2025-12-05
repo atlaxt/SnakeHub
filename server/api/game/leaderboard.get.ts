@@ -1,15 +1,17 @@
-export default defineEventHandler(async () => {
+import type { LeaderboardEntry, StoredUser } from '~~/shared/types/game'
+
+export default defineEventHandler(async (): Promise<LeaderboardEntry[]> => {
   const keys = await useStorage('data').getKeys('user:')
 
-  const allUsers = await Promise.all(
-    keys.map(async key => await useStorage('data').getItem(key)),
+  const storageItems = await Promise.all(
+    keys.map(key => useStorage('data').getItem<StoredUser>(key)),
   )
 
-  const leaderboard = allUsers
-    .filter((u: any) => u && u.score)
-    .sort((a: any, b: any) => b.score - a.score)
+  const leaderboard: LeaderboardEntry[] = storageItems
+    .filter((u): u is StoredUser => !!u && typeof u.score === 'number')
+    .sort((a, b) => b.score - a.score)
     .slice(0, 50)
-    .map((u: any) => ({
+    .map(u => ({
       name: u.username,
       description: `Score: ${u.score}`,
       avatar: u.avatar,
