@@ -1,4 +1,6 @@
 <script setup>
+import { Analytics } from '@vercel/analytics/nuxt'
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -27,6 +29,7 @@ useSeoMeta({
 
 <template>
   <UApp>
+    <Analytics />
     <BgPixels class="" />
     <UMain>
       <UContainer>

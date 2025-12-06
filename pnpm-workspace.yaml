@@ -1,22 +1,26 @@
-catalogMode: prefer
-cleanupUnusedCatalogs: true
-
-shellEmulator: true
-trustPolicy: no-downgrade
-
 catalog:
   '@antfu/eslint-config': ^6.4.2
   '@iconify-json/lucide': ^1.2.74
   '@iconify-json/simple-icons': ^1.2.59
   '@nuxt/ui': ^4.2.1
+  '@vercel/analytics': ^1.6.1
   eslint: ^9.39.1
   nuxt: ^4.2.1
   nuxt-auth-utils: 0.5.25
   typescript: ^5.9.3
   vue-tsc: ^3.1.5
+
+catalogMode: prefer
+
+cleanupUnusedCatalogs: true
+
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@tailwindcss/oxide'
   - esbuild
   - unrs-resolver
   - vue-demi
+
+shellEmulator: true
+
+trustPolicy: no-downgrade
