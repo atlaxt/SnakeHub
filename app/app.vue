@@ -28,8 +28,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <Analytics />
   <UApp>
+    <Analytics />
     <BgPixels class="" />
     <UMain>
       <UContainer>
