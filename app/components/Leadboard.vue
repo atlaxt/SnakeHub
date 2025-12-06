@@ -6,8 +6,8 @@ const { data: leaderboard, pending, refresh } = useAsyncData<LeaderboardEntry[]>
 
 defineExpose({ refresh })
 
-onMounted(() => {
-  refresh()
+onMounted(async () => {
+  await refresh()
 })
 </script>
 
