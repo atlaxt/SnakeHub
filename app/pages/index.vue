@@ -20,6 +20,10 @@ async function handleGameOver(finalScore: number) {
     }
   }
 }
+
+onMounted(async () => {
+  await leaderboardRef.value.refresh()
+})
 </script>
 
 <template>
