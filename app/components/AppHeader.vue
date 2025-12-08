@@ -13,7 +13,7 @@ defineProps<{ score: number }>()
     <div class="flex flex-col items-center">
       <span class="text-xs font-bold tracking-widest text-muted">CURRENT SCORE</span>
       <span
-        class="text-3xl font-black transition-all duration-300 transform scale-100" :class="{
+        class="text-3xl font-black font-mono transition-all duration-300 transform scale-100" :class="{
           'text-primary': score > 0,
           'text-muted': score <= 0,
         }"
